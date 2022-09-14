@@ -24,11 +24,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        widget.cpp
+    main.cpp \
+    widget.cpp \
+    application/application.cpp \
+    event_handler/event_handler.cpp \
+    layout/layout.cpp \
+    layout_configuration/layout_config.cpp \
+    movement_manger/movement_manager.cpp \
+    snake/snake.cpp \
+    snake_configuration/snake_config.cpp \
+    timer/timer.cpp \
+
 
 HEADERS += \
-        widget.h
+    widget.h \
+    application/application.h \
+    event_handler/event_handler.h \
+    layout/layout.h \
+    layout_configuration/layout_config.h \
+    movement_manger/movement_manager.h \
+    snake/snake.h \
+    snake_configuration/snake_config.h \
+    timer/timer.h \
+
 
 FORMS += \
         widget.ui
