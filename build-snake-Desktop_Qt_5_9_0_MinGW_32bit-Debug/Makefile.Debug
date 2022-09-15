@@ -14,7 +14,7 @@ CXX           = g++
 DEFINES       = -DUNICODE -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -pipe -g -Wextra -Wall -W $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -pipe -g -std=gnu++11 -Wextra -Wall -W -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I..\snake -I. -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtWidgets -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtGui -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtANGLE -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtCore -Idebug -I. -IC:\Qt\Qt5.9.0\5.9\mingw53_32\mkspecs\win32-g++ 
+INCPATH       = -I..\snake -I. -I..\snake\application -I..\snake\event_handler -I..\snake\layout -I..\snake\layout_configuration -Imovement_manager -I..\snake\snake -I..\snake\snake_configuration -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtWidgets -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtGui -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtANGLE -IC:\Qt\Qt5.9.0\5.9\mingw53_32\include\QtCore -Idebug -I. -IC:\Qt\Qt5.9.0\5.9\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
 LIBS        =        -lmingw32 -LC:\Qt\Qt5.9.0\5.9\mingw53_32\lib C:\Qt\Qt5.9.0\5.9\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 C:\Qt\Qt5.9.0\5.9\mingw53_32\lib\libQt5Widgetsd.a C:\Qt\Qt5.9.0\5.9\mingw53_32\lib\libQt5Guid.a C:\Qt\Qt5.9.0\5.9\mingw53_32\lib\libQt5Cored.a 
@@ -455,10 +455,11 @@ debug/moc_widget.cpp: C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QWidget \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qtexttable.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qvalidator.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qtguiversion.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QTimerEvent \
 		../snake/widget.h \
 		debug/moc_predefs.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/bin/moc.exe
-	C:\Qt\Qt5.9.0\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/win32-g++ -IE:/GitHub/snake/snake-game/snake -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtANGLE -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Qt5.9.0/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Qt5.9.0/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\snake\widget.h -o debug\moc_widget.cpp
+	C:\Qt\Qt5.9.0\5.9\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -IC:/Qt/Qt5.9.0/5.9/mingw53_32/mkspecs/win32-g++ -IE:/GitHub/snake/snake-game/snake -IE:/GitHub/snake/snake-game/snake/application -IE:/GitHub/snake/snake-game/snake/event_handler -IE:/GitHub/snake/snake-game/snake/layout -IE:/GitHub/snake/snake-game/snake/layout_configuration -IE:/GitHub/snake/snake-game/snake/movement_manager -IE:/GitHub/snake/snake-game/snake/snake -IE:/GitHub/snake/snake-game/snake/snake_configuration -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtANGLE -IC:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore -I. -IC:/Qt/Qt5.9.0/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IC:/Qt/Qt5.9.0/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IC:/Qt/Qt5.9.0/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ..\snake\widget.h -o debug\moc_widget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -801,6 +802,7 @@ debug/main.o: ../snake/main.cpp ../snake/widget.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qtexttable.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qvalidator.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qtguiversion.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QTimerEvent \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QApplication \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qapplication.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qdesktopwidget.h \
@@ -1129,6 +1131,7 @@ debug/widget.o: ../snake/widget.cpp ../snake/widget.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qtexttable.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qvalidator.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/qtguiversion.h \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QTimerEvent \
 		ui_widget.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QVariant \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/QAction \
@@ -1153,7 +1156,8 @@ debug/widget.o: ../snake/widget.cpp ../snake/widget.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qtabbar.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qtabwidget.h \
 		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtWidgets/qrubberband.h \
-		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/QKeyEvent
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtGui/QKeyEvent \
+		C:/Qt/Qt5.9.0/5.9/mingw53_32/include/QtCore/QTimer
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\widget.o ..\snake\widget.cpp
 
 debug/application.o: ../snake/application/application.cpp 

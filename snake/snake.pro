@@ -34,18 +34,30 @@ SOURCES += \
     snake/snake.cpp \
     snake_configuration/snake_config.cpp \
     timer/timer.cpp \
+    frame/frame.cpp
 
 
 HEADERS += \
     widget.h \
     application/application.h \
     event_handler/event_handler.h \
-    layout/layout.h \
     layout_configuration/layout_config.h \
     movement_manger/movement_manager.h \
     snake/snake.h \
     snake_configuration/snake_config.h \
     timer/timer.h \
+    frame/frame.h
+
+
+INCLUDEPATH += \
+    application \
+    event_handler \
+    frame \
+    layout_configuration \
+    movement_manager \
+    snake \
+    snake_configuration
+
 
 
 FORMS += \

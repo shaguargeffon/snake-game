@@ -19,9 +19,6 @@ public:
     explicit Widget(QWidget *parent = 0);
     virtual ~Widget();
 
-
-
-
 private:
     Ui::Widget *ui;
 
@@ -35,11 +32,10 @@ class KeyPress : public QWidget
 public:
     KeyPress(QWidget *parent = 0) : QWidget(parent)
     {
-        timerId = startTimer(1000);
+        timerId = startTimer(2000);
     }
 
 protected:
-
     void keyPressEvent(QKeyEvent *event)
     {
         if(event->key() == Qt::Key_Escape)
@@ -56,11 +52,16 @@ protected:
         }
     }
 
-
     void timerEvent(QTimerEvent *event)
     {
+        if(event == nullptr)
+        {
+            std::cout<<"Event is null."<<std::endl;
+        }
+
         std::cout<<"Update"<<std::endl;
     }
+
 
     ~KeyPress()
     {
