@@ -19,9 +19,12 @@ int main(int argc, char *argv[])
 
 
 
-    KeyPress *keyPress = new KeyPress();
+    Game *game = new Game();
 
-    keyPress->show();
+
+
+
+    game->show();
 
     return a.exec();
 }

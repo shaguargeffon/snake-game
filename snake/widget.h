@@ -28,11 +28,11 @@ private:
 };
 
 
-class KeyPress : public QWidget
+class Game : public QWidget
 {
     Q_OBJECT    
 public:
-    KeyPress(QWidget *parent = 0, unsigned int lvl = 1) : QWidget(parent), game_level(lvl)
+    Game(QWidget *parent = 0, unsigned int lvl = 1) : QWidget(parent), game_level(lvl)
     {
         timerId = startTimer(timer_scale);
 
@@ -125,7 +125,7 @@ protected:
     }
 
 
-    ~KeyPress()
+    ~Game()
     {
         killTimer(timerId);
     }

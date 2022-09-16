@@ -86,25 +86,25 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;
 }
-struct qt_meta_stringdata_KeyPress_t {
+struct qt_meta_stringdata_Game_t {
     QByteArrayData data[1];
-    char stringdata0[9];
+    char stringdata0[5];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_KeyPress_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Game_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_KeyPress_t qt_meta_stringdata_KeyPress = {
+static const qt_meta_stringdata_Game_t qt_meta_stringdata_Game = {
     {
-QT_MOC_LITERAL(0, 0, 8) // "KeyPress"
+QT_MOC_LITERAL(0, 0, 4) // "Game"
 
     },
-    "KeyPress"
+    "Game"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_KeyPress[] = {
+static const uint qt_meta_data_Game[] = {
 
  // content:
        7,       // revision
@@ -120,7 +120,7 @@ static const uint qt_meta_data_KeyPress[] = {
        0        // eod
 };
 
-void KeyPress::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Game::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -128,26 +128,26 @@ void KeyPress::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
     Q_UNUSED(_a);
 }
 
-const QMetaObject KeyPress::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_KeyPress.data,
-      qt_meta_data_KeyPress,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject Game::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_Game.data,
+      qt_meta_data_Game,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *KeyPress::metaObject() const
+const QMetaObject *Game::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *KeyPress::qt_metacast(const char *_clname)
+void *Game::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_KeyPress.stringdata0))
-        return static_cast<void*>(const_cast< KeyPress*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_Game.stringdata0))
+        return static_cast<void*>(const_cast< Game*>(this));
     return QWidget::qt_metacast(_clname);
 }
 
-int KeyPress::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Game::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;
