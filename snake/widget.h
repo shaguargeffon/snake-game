@@ -6,6 +6,7 @@
 #include <QtGui>
 #include <iostream>
 #include <QTimerEvent>
+#include "config.h"
 #include "event_handler.h"
 
 
@@ -27,31 +28,30 @@ private:
 };
 
 
-
 class KeyPress : public QWidget
 {
     Q_OBJECT    
 public:
     KeyPress(QWidget *parent = 0, unsigned int lvl = 1) : QWidget(parent), game_level(lvl)
     {
-        timerId = startTimer(20);
+        timerId = startTimer(timer_scale);
 
         switch(game_level)
         {
             case 1:
-                timer_counter = 5;
+                timer_counter = timer_multiplier_hard;
                 break;
 
             case 2:
-                timer_counter = 10;
+                timer_counter = timer_multiplier_normal;
                 break;
 
             case 3:
-                timer_counter = 20;
+                timer_counter = timer_multiplier_easy;
                 break;
 
             default:
-                timer_counter = 20;
+                timer_counter = timer_multiplier_easy;
                 break;
         }
 
@@ -61,10 +61,31 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *event)
     {
-        if(event->key() == Qt::Key_Escape)
+        if(event->key() == Qt::Key_W)
         {
-            std::cout<<"press ESC key."<<std::endl;
+            std::cout<<"Set up direction."<<std::endl;
         }
+
+        if(event->key() == Qt::Key_S)
+        {
+            std::cout<<"Set down direction"<<std::endl;
+        }
+
+        if(event->key() == Qt::Key_A)
+        {
+            std::cout<<"Set left direction."<<std::endl;
+        }
+
+        if(event->key() == Qt::Key_D)
+        {
+            std::cout<<"Set right direction."<<std::endl;
+        }
+
+        if(event->key() == Qt::Key_P)
+        {
+            std::cout<<"Stop game."<<std::endl;
+        }
+
     }
 
 
@@ -114,6 +135,7 @@ private:
     unsigned int game_level;
     unsigned int timer_counter{0};
     unsigned int timer_recorder{0};
+
 };
 
 

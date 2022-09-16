@@ -30,7 +30,6 @@ SOURCES += \
     event_handler/event_handler.cpp \
     movement_manger/movement_manager.cpp \
     snake/snake.cpp \
-    timer/timer.cpp \
     frame/frame.cpp \
     config/config.cpp
 
@@ -41,7 +40,6 @@ HEADERS += \
     event_handler/event_handler.h \
     movement_manger/movement_manager.h \
     snake/snake.h \
-    timer/timer.h \
     frame/frame.h \
     config/config.h
 
@@ -50,10 +48,9 @@ INCLUDEPATH += \
     application \
     event_handler \
     frame \
-    layout_configuration \
     movement_manager \
     snake \
-    snake_configuration
+    config
 
 
 
