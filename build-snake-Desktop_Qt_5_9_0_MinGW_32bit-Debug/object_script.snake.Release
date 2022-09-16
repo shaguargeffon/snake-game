@@ -3,11 +3,11 @@ INPUT(
 ./release\widget.o
 ./release\application.o
 ./release\event_handler.o
-./release\layout.o
 ./release\layout_config.o
 ./release\movement_manager.o
 ./release\snake.o
 ./release\snake_config.o
 ./release\timer.o
+./release\frame.o
 ./release\moc_widget.o
 );

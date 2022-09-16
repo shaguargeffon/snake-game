@@ -3,11 +3,11 @@ INPUT(
 ./debug\widget.o
 ./debug\application.o
 ./debug\event_handler.o
-./debug\layout.o
 ./debug\layout_config.o
 ./debug\movement_manager.o
 ./debug\snake.o
 ./debug\snake_config.o
 ./debug\timer.o
+./debug\frame.o
 ./debug\moc_widget.o
 );

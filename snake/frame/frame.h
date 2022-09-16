@@ -10,11 +10,7 @@
 class Frame: public QPushButton
 {
 public:
-    Frame(unsigned int pos_x, unsigned int pos_y): x(pos_x), y(pos_y)
-    {
-
-    }
-
+    Frame(unsigned int pos_x, unsigned int pos_y);
 
 private:
     unsigned int x;

@@ -115,6 +115,22 @@ public:
 };
 
 
+class MoveEvent: public Event
+{
+public:
+    MoveEvent(unsigned int id): Event(id)
+    {
+
+    }
+
+    void handle_event() final
+    {
+        std::cout<<"Move event is handled."<<std::endl;
+    }
+
+
+};
+
 
 
 #endif //EVENT_HANDLER_H

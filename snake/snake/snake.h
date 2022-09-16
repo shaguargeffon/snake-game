@@ -19,9 +19,9 @@ enum class MoveDirection
 class Snake: public QPushButton
 {
 public:
-    Snake(unsigned int x, unsigned int y): x(index_x), y(index_y)
+    Snake(unsigned int x, unsigned int y): index_x(x), index_y(y)
     {
-        dir = None;
+        dir = MoveDirection::NONE;
     }
 
 

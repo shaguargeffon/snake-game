@@ -28,25 +28,22 @@ SOURCES += \
     widget.cpp \
     application/application.cpp \
     event_handler/event_handler.cpp \
-    layout/layout.cpp \
-    layout_configuration/layout_config.cpp \
     movement_manger/movement_manager.cpp \
     snake/snake.cpp \
-    snake_configuration/snake_config.cpp \
     timer/timer.cpp \
-    frame/frame.cpp
+    frame/frame.cpp \
+    config/config.cpp
 
 
 HEADERS += \
     widget.h \
     application/application.h \
     event_handler/event_handler.h \
-    layout_configuration/layout_config.h \
     movement_manger/movement_manager.h \
     snake/snake.h \
-    snake_configuration/snake_config.h \
     timer/timer.h \
-    frame/frame.h
+    frame/frame.h \
+    config/config.h
 
 
 INCLUDEPATH += \
