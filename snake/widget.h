@@ -58,6 +58,13 @@ public:
         timer_recorder = timer_counter;
     }
 
+
+    ~Game()
+    {
+        killTimer(timerId);
+    }
+
+
 protected:
     void keyPressEvent(QKeyEvent *event)
     {
@@ -124,11 +131,6 @@ protected:
         e->handle_event();
     }
 
-
-    ~Game()
-    {
-        killTimer(timerId);
-    }
 
 private:
     int timerId;

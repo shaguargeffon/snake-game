@@ -5,8 +5,9 @@ INPUT(
 ./release\event_handler.o
 ./release\movement_manager.o
 ./release\snake.o
-./release\timer.o
 ./release\frame.o
 ./release\config.o
+./release\frame_builder.o
+./release\frame_layout.o
 ./release\moc_widget.o
 );

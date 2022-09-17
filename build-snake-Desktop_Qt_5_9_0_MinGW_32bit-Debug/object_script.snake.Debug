@@ -5,8 +5,9 @@ INPUT(
 ./debug\event_handler.o
 ./debug\movement_manager.o
 ./debug\snake.o
-./debug\timer.o
 ./debug\frame.o
 ./debug\config.o
+./debug\frame_builder.o
+./debug\frame_layout.o
 ./debug\moc_widget.o
 );

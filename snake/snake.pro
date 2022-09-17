@@ -31,7 +31,9 @@ SOURCES += \
     movement_manger/movement_manager.cpp \
     snake/snake.cpp \
     frame/frame.cpp \
-    config/config.cpp
+    config/config.cpp \
+    frame/frame_builder.cpp \
+    frame/frame_layout.cpp
 
 
 HEADERS += \
@@ -41,7 +43,9 @@ HEADERS += \
     movement_manger/movement_manager.h \
     snake/snake.h \
     frame/frame.h \
-    config/config.h
+    config/config.h \
+    frame/frame_builder.h \
+    frame/frame_layout.h
 
 
 INCLUDEPATH += \

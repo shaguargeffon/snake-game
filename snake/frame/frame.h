@@ -1,8 +1,8 @@
-#ifndef LAYOUT_H
-#define LAYOUT_H
+#ifndef FRAME_H
+#define FRAME_H
 
 #include <QPushButton>
-#include "layout_config.h"
+#include "config.h"
 
 
 
@@ -11,6 +11,17 @@ class Frame: public QPushButton
 {
 public:
     Frame(unsigned int pos_x, unsigned int pos_y);
+
+    unsigned int get_x()
+    {
+        return x;
+    }
+
+    unsigned int get_y()
+    {
+        return y;
+    }
+
 
 private:
     unsigned int x;
@@ -23,4 +34,4 @@ private:
 
 
 
-#endif // LAYOUT_H
+#endif // FRAME_H
