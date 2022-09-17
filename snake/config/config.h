@@ -11,17 +11,14 @@ extern const unsigned int timer_multiplier_easy;
 extern const unsigned int game_size_x;
 extern const unsigned int game_size_y;
 
-
 extern const unsigned int frame_scope_x;
 extern const unsigned int frame_scope_y;
 
 extern const unsigned int frame_amount_x;
 extern const unsigned int frame_amount_y;
 
-
 extern const unsigned int element_size_x;
 extern const unsigned int element_size_y;
-
 
 extern const unsigned int start_point_coordinate_x;
 extern const unsigned int start_point_coordinate_y;

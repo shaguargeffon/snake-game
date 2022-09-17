@@ -3,7 +3,6 @@ INPUT(
 ./debug\widget.o
 ./debug\application.o
 ./debug\event_handler.o
-./debug\movement_manager.o
 ./debug\snake.o
 ./debug\frame.o
 ./debug\config.o

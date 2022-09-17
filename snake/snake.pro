@@ -28,7 +28,6 @@ SOURCES += \
     widget.cpp \
     application/application.cpp \
     event_handler/event_handler.cpp \
-    movement_manger/movement_manager.cpp \
     snake/snake.cpp \
     frame/frame.cpp \
     config/config.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     widget.h \
     application/application.h \
     event_handler/event_handler.h \
-    movement_manger/movement_manager.h \
     snake/snake.h \
     frame/frame.h \
     config/config.h \
@@ -58,7 +56,6 @@ INCLUDEPATH += \
     application \
     event_handler \
     frame \
-    movement_manager \
     snake \
     config
 

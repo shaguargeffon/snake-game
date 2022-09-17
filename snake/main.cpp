@@ -12,8 +12,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //Widget w;
-    //w.show();
 
     Game game;
 
@@ -24,7 +22,10 @@ int main(int argc, char *argv[])
 
 
     SnakeLayout snake_layout;
-    SnakeBuilder s_builder(&snake_layout, game);
+    SnakeBuilder s_builder(&snake_layout);
+    game.set_snake_builder(&s_builder);
+    game.add_snake_to_game();
+
 
 
     game.show();

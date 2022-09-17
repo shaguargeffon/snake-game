@@ -3,7 +3,7 @@
 
 
 #include <QPushButton>
-#include "widget.h"
+//#include "widget.h"
 #include "snake.h"
 #include "snake_layout.h"
 
@@ -11,8 +11,9 @@
 class SnakeBuilder
 {
 public:
-    SnakeBuilder(SnakeLayout* s, Game& w)
+    SnakeBuilder(SnakeLayout* s): snake_layout_p(s)
     {
+        /*
         s->build_layout();
 
         for(auto it=s->get_layout().begin(); it!=s->get_layout().end(); it++)
@@ -37,6 +38,7 @@ public:
 
             snake_p->show();
         }
+        */
     }
 
 
@@ -56,7 +58,7 @@ public:
         return res;
     }
 
-    bool is_adding_snake_sucessful(Snake *s)
+    bool add_snake_sucessful(Snake *s)
     {
         bool is_snake_not_found_in_buffer = !is_snake_exsist(s);
 
@@ -68,7 +70,7 @@ public:
         return is_snake_not_found_in_buffer;
     }
 
-    bool is_removing_first_snake_sucessful()
+    bool remove_first_snake_sucessful()
     {
         if(available_snake.size() > 1) //ensure that there is at least one snake element in the snake
         {
@@ -80,8 +82,19 @@ public:
     }
 
 
+    SnakeLayout* get_snake_layout_pointer()
+    {
+        return snake_layout_p;
+    }
+
+    std::list<Snake*>& get_available_snake()
+    {
+        return available_snake;
+    }
+
 private:
     std::list<Snake*> available_snake;
+    SnakeLayout* snake_layout_p;
 };
 
 

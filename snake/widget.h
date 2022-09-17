@@ -8,6 +8,8 @@
 #include <QTimerEvent>
 #include "config.h"
 #include "event_handler.h"
+#include "snake_builder.h"
+
 
 
 namespace Ui {
@@ -56,6 +58,42 @@ public:
         }
 
         timer_recorder = timer_counter;
+    }
+
+
+    void set_snake_builder(SnakeBuilder* s)
+    {
+        snake_builder_p = s;
+    }
+
+
+    void add_snake_to_game()
+    {
+        auto s = snake_builder_p->get_snake_layout_pointer();
+        s->build_layout();
+
+        for(auto it=s->get_layout().begin(); it!=s->get_layout().end(); it++)
+        {
+            unsigned int x{start_point_coordinate_x};
+            unsigned int y{start_point_coordinate_y};
+
+            x+=(element_size_x)*((*it)->get_x());
+            y+=(element_size_y)*((*it)->get_y());
+
+            Snake* snake_p = new Snake(x, y);
+
+            snake_p->setParent(this);
+
+            snake_p->move(x, y);
+
+            snake_p->resize(element_size_x, element_size_y);
+
+            snake_p->setStyleSheet("background-color: red");
+
+            snake_builder_p->get_available_snake().push_front(snake_p);
+
+            snake_p->show();
+        }
     }
 
 
@@ -118,18 +156,14 @@ protected:
         }
         else
         {
-            MoveEvent event(5);
-            send_event(&event);
+
             std::cout<<"Update"<<std::endl;
             timer_counter = timer_recorder;
         }
     }
 
 
-    void send_event(Event *e)
-    {
-        e->handle_event();
-    }
+
 
 
 private:
@@ -137,7 +171,7 @@ private:
     unsigned int game_level;
     unsigned int timer_counter{0};
     unsigned int timer_recorder{0};
-
+    SnakeBuilder* snake_builder_p;
 };
 
 

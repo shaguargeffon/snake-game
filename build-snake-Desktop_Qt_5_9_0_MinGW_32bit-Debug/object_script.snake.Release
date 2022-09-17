@@ -3,7 +3,6 @@ INPUT(
 ./release\widget.o
 ./release\application.o
 ./release\event_handler.o
-./release\movement_manager.o
 ./release\snake.o
 ./release\frame.o
 ./release\config.o
