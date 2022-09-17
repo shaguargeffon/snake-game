@@ -19,7 +19,42 @@ enum class MoveDirection
 class Snake: public QPushButton
 {
 public:
-    Snake(unsigned int x, unsigned int y): index_x(x), index_y(y)
+    Snake(unsigned int pos_x, unsigned int pos_y);
+
+    unsigned int get_x()
+    {
+        return x;
+    }
+
+    unsigned int get_y()
+    {
+        return y;
+    }
+
+    bool operator==(const Snake &s) const
+    {
+        return ((this->x==s.x) && (this->y==s.y));
+    }
+
+
+
+private:
+    unsigned int x;
+    unsigned int y;
+};
+
+
+
+
+
+
+
+/*
+
+class Snake: public QPushButton
+{
+public:
+    Snake(unsigned int index_x, unsigned int index_y): x(index_x), y(index_y)
     {
         dir = MoveDirection::NONE;
     }
@@ -27,36 +62,37 @@ public:
 
     void move_up()
     {
-        if(index_y>0)
+        if(y>0)
         {
-            index_y--;
+            y--;
         }
     }
 
     void move_down()
     {
-        index_y--;
+        y++;
     }
 
     void move_left()
     {
-        index_x--;
+        x--;
     }
 
 
     void move_right()
     {
-        index_x++;
+        x++;
     }
 
 
 private:
-    unsigned int index_x;
-    unsigned int index_y;
+    unsigned int x;
+    unsigned int y;
     MoveDirection dir;
+
 };
 
-
+*/
 
 
 

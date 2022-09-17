@@ -9,5 +9,7 @@ INPUT(
 ./release\config.o
 ./release\frame_builder.o
 ./release\frame_layout.o
+./release\snake_builder.o
+./release\snake_layout.o
 ./release\moc_widget.o
 );

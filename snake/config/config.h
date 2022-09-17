@@ -26,5 +26,9 @@ extern const unsigned int element_size_y;
 extern const unsigned int start_point_coordinate_x;
 extern const unsigned int start_point_coordinate_y;
 
+extern const unsigned int first_snake_x;
+extern const unsigned int first_snake_y;
+
+
 
 #endif //CONFIG_H

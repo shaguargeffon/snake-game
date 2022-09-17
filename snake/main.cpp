@@ -5,7 +5,7 @@
 #include <Qdebug>
 #include <iostream>
 #include "frame_builder.h"
-
+#include "snake_builder.h"
 
 
 
@@ -21,6 +21,11 @@ int main(int argc, char *argv[])
 
     FrameLayout frame_layout;
     FrameBuilder f_builder(&frame_layout, game);
+
+
+    SnakeLayout snake_layout;
+    SnakeBuilder s_builder(&snake_layout, game);
+
 
     game.show();
 

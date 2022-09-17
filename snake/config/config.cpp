@@ -28,4 +28,7 @@ const unsigned int start_point_coordinate_x{100};
 const unsigned int start_point_coordinate_y{100};
 
 
+const unsigned int first_snake_x{frame_amount_x/2};
+const unsigned int first_snake_y{frame_amount_y/2};
+
 
