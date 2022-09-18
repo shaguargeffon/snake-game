@@ -11,34 +11,9 @@
 class SnakeBuilder
 {
 public:
-    SnakeBuilder(SnakeLayout* s): snake_layout_p(s)
+    SnakeBuilder(SnakeLayout* s): snake_layout_p(s), available_snake(s->get_layout())
     {
-        /*
-        s->build_layout();
 
-        for(auto it=s->get_layout().begin(); it!=s->get_layout().end(); it++)
-        {
-            unsigned int x{start_point_coordinate_x};
-            unsigned int y{start_point_coordinate_y};
-
-            x+=(element_size_x)*((*it)->get_x());
-            y+=(element_size_y)*((*it)->get_y());
-
-            Snake* snake_p = new Snake(x, y);
-
-            snake_p->setParent(&w);
-
-            snake_p->move(x, y);
-
-            snake_p->resize(element_size_x, element_size_y);
-
-            snake_p->setStyleSheet("background-color: red");
-
-            available_snake.push_front(snake_p);
-
-            snake_p->show();
-        }
-        */
     }
 
 
@@ -93,8 +68,9 @@ public:
     }
 
 private:
-    std::list<Snake*> available_snake;
     SnakeLayout* snake_layout_p;
+    std::list<Snake*>& available_snake;
+
 };
 
 

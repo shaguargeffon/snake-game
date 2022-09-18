@@ -67,7 +67,7 @@ public:
     }
 
 
-    void add_snake_to_game()
+    void initial_snake_to_game()
     {
         auto s = snake_builder_p->get_snake_layout_pointer();
         s->build_layout();
@@ -97,6 +97,42 @@ public:
     }
 
 
+    void move_up_callback()
+    {
+       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
+       snake_p->move_up();
+       snake_p->move(snake_p->get_x(), snake_p->get_y());
+       snake_p->show();
+    }
+
+
+    void move_down_callback()
+    {
+       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
+       snake_p->move_down();
+       snake_p->move(snake_p->get_x(), snake_p->get_y());
+       snake_p->show();
+    }
+
+
+    void move_left_callback()
+    {
+       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
+       snake_p->move_left();
+       snake_p->move(snake_p->get_x(), snake_p->get_y());
+       snake_p->show();
+    }
+
+
+    void move_right_callback()
+    {
+       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
+       snake_p->move_right();
+       snake_p->move(snake_p->get_x(), snake_p->get_y());
+       snake_p->show();
+    }
+
+
     ~Game()
     {
         killTimer(timerId);
@@ -108,16 +144,19 @@ protected:
     {
         if(event->key() == Qt::Key_W)
         {
+            move_up_callback();
             std::cout<<"Set up direction."<<std::endl;
         }
 
         if(event->key() == Qt::Key_S)
         {
+            move_down_callback();
             std::cout<<"Set down direction"<<std::endl;
         }
 
         if(event->key() == Qt::Key_A)
         {
+            move_left_callback();
             std::cout<<"Set left direction."<<std::endl;
         }
 
@@ -128,6 +167,7 @@ protected:
 
         if(event->key() == Qt::Key_P)
         {
+            move_right_callback();
             std::cout<<"Stop game."<<std::endl;
         }
 

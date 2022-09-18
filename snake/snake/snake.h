@@ -36,6 +36,26 @@ public:
         return ((this->x==s.x) && (this->y==s.y));
     }
 
+    void move_up()
+    {
+        y--;
+    }
+
+    void move_down()
+    {
+        y++;
+    }
+
+
+    void move_left()
+    {
+        x--;
+    }
+
+    void move_right()
+    {
+        x++;
+    }
 
 
 private:
