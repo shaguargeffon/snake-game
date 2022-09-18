@@ -3,7 +3,7 @@
 
 
 #include <QPushButton>
-
+#include "config.h"
 
 enum class MoveDirection
 {
@@ -38,23 +38,23 @@ public:
 
     void move_up()
     {
-        y--;
+        y-= element_size_y;
     }
 
     void move_down()
     {
-        y++;
+        y+=element_size_y;
     }
 
 
     void move_left()
     {
-        x--;
+        x-=element_size_x;
     }
 
     void move_right()
     {
-        x++;
+        x+=element_size_x;
     }
 
 

@@ -102,6 +102,12 @@ public:
        Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
        snake_p->move_up();
        snake_p->move(snake_p->get_x(), snake_p->get_y());
+
+       std::cout<<"x: "<<snake_p->get_x()<<std::endl;
+       std::cout<<"y: "<<snake_p->get_y()<<std::endl;
+
+
+
        snake_p->show();
     }
 
@@ -162,12 +168,13 @@ protected:
 
         if(event->key() == Qt::Key_D)
         {
+            move_right_callback();
             std::cout<<"Set right direction."<<std::endl;
         }
 
         if(event->key() == Qt::Key_P)
         {
-            move_right_callback();
+            //move_right_callback();
             std::cout<<"Stop game."<<std::endl;
         }
 
