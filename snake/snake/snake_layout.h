@@ -13,7 +13,13 @@ public:
 
     void build_layout()
     {
-        Snake* p = new Snake(first_snake_x, first_snake_y);
+        unsigned int x{start_point_coordinate_x};
+        unsigned int y{start_point_coordinate_y};
+
+        x+=(element_size_x)*(first_snake_x);
+        y+=(element_size_y)*(first_snake_y);
+        Snake* p = new Snake(x, y);
+
         snake_layout.push_front(p);
     }
 

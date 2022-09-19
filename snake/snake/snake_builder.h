@@ -67,6 +67,12 @@ public:
         return available_snake;
     }
 
+
+    void set_available_snake(std::list<Snake*>& snake_list)
+    {
+        available_snake = snake_list;
+    }
+
 private:
     SnakeLayout* snake_layout_p;
     std::list<Snake*>& available_snake;

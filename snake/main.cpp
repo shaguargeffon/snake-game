@@ -23,10 +23,17 @@ int main(int argc, char *argv[])
 
     SnakeLayout snake_layout;
     SnakeBuilder s_builder(&snake_layout);
+
+
+
+
     game.set_snake_builder(&s_builder);
+
+
+
     game.initial_snake_to_game();
 
-
+    std::cout<<s_builder.get_available_snake().size()<<std::endl;
 
     game.show();
 
