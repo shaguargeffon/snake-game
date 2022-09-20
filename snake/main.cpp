@@ -20,20 +20,10 @@ int main(int argc, char *argv[])
     FrameLayout frame_layout;
     FrameBuilder f_builder(&frame_layout, game);
 
-
-    SnakeLayout snake_layout;
-    SnakeBuilder s_builder(&snake_layout);
-
-
-
-
+    SnakeBuilder s_builder;
     game.set_snake_builder(&s_builder);
-
-
-
     game.initial_snake_to_game();
 
-    std::cout<<s_builder.get_available_snake().size()<<std::endl;
 
     game.show();
 

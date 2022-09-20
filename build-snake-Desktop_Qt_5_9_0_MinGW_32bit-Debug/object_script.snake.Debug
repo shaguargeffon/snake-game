@@ -9,6 +9,5 @@ INPUT(
 ./debug\frame_builder.o
 ./debug\frame_layout.o
 ./debug\snake_builder.o
-./debug\snake_layout.o
 ./debug\moc_widget.o
 );

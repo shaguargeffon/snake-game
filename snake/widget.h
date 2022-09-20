@@ -70,11 +70,11 @@ public:
 
     void initial_snake_to_game()
     {
-        auto s = snake_builder_p->get_snake_layout_pointer();
+        auto s = snake_builder_p->get_available_snake();
 
-        s->build_layout();
+        //s->build_layout();
 
-        for(auto it=s->get_layout().begin(); it!=s->get_layout().end(); it++)
+        for(auto it=s.begin(); it!=s.end(); it++)
         {
             unsigned int x{start_point_coordinate_x};
             unsigned int y{start_point_coordinate_y};

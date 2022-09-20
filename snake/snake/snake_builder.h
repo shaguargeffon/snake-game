@@ -5,15 +5,21 @@
 #include <QPushButton>
 //#include "widget.h"
 #include "snake.h"
-#include "snake_layout.h"
 
 
 class SnakeBuilder
 {
 public:
-    SnakeBuilder(SnakeLayout* s): snake_layout_p(s), available_snake(s->get_layout())
+    SnakeBuilder()
     {
+        unsigned int x{start_point_coordinate_x};
+        unsigned int y{start_point_coordinate_y};
 
+        x+=(element_size_x)*(first_snake_x);
+        y+=(element_size_y)*(first_snake_y);
+        Snake* p = new Snake(x, y);
+
+        available_snake.push_front(p);
     }
 
 
@@ -57,11 +63,6 @@ public:
     }
 
 
-    SnakeLayout* get_snake_layout_pointer()
-    {
-        return snake_layout_p;
-    }
-
     std::list<Snake*>& get_available_snake()
     {
         return available_snake;
@@ -73,9 +74,10 @@ public:
         available_snake = snake_list;
     }
 
+
+
 private:
-    SnakeLayout* snake_layout_p;
-    std::list<Snake*>& available_snake;
+    std::list<Snake*> available_snake;
 
 };
 
