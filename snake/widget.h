@@ -178,44 +178,135 @@ public:
     }
 
 
-    void move_to_next_postion()
+    bool is_snake_head_overlapped_with_block()
     {
-        auto snake_head = snake_list.begin();
-
-        auto it = snake_list.end();
-
-        std::advance(it, -1);
-
-        *(*it) = *(*snake_head);
+        auto it = snake_list.begin();
+        unsigned int pos_x = (*it)->get_x();
+        unsigned int pos_y = (*it)->get_y();
 
         if((*it)->get_dir() == MoveDirection::UP)
         {
-            (*it)->move_up();
+             pos_y -= element_size_y;
         }
 
         if((*it)->get_dir() == MoveDirection::DOWN)
         {
-            (*it)->move_down();
+            pos_y += element_size_y;
         }
 
         if((*it)->get_dir() == MoveDirection::LEFT)
         {
-            (*it)->move_left();
+            pos_x -= element_size_x;
         }
 
         if((*it)->get_dir() == MoveDirection::RIGHT)
         {
-            (*it)->move_right();
+            pos_x += element_size_x;
         }
 
-        snake_list.push_front(*it);
-
-        snake_list.pop_back();
-
-        for(auto snake_ele : snake_list)
+        bool is_next_snake_position_overlapped_with_block = false;
+        for(auto snake : block_buffer)
         {
-            snake_ele->move(snake_ele->get_x(), snake_ele->get_y());
-            snake_ele->show();
+            if ((snake->get_x() == pos_x) && (snake->get_y() == pos_y))
+            {
+                is_next_snake_position_overlapped_with_block = true;
+                break;
+            }
+        }
+
+        return is_next_snake_position_overlapped_with_block;
+    }
+
+
+    std::vector<std::shared_ptr<Snake>>::iterator find_overlapped_iterator()
+    {
+        auto it = snake_list.begin();
+        unsigned int pos_x = (*it)->get_x();
+        unsigned int pos_y = (*it)->get_y();
+
+        if((*it)->get_dir() == MoveDirection::UP)
+        {
+             pos_y -= element_size_y;
+        }
+
+        if((*it)->get_dir() == MoveDirection::DOWN)
+        {
+            pos_y += element_size_y;
+        }
+
+        if((*it)->get_dir() == MoveDirection::LEFT)
+        {
+            pos_x -= element_size_x;
+        }
+
+        if((*it)->get_dir() == MoveDirection::RIGHT)
+        {
+            pos_x += element_size_x;
+        }
+
+
+        for(auto iter=block_buffer.begin(); iter!=block_buffer.end(); iter++)
+        {
+            if ((*iter)->get_x() == pos_x && (*iter)->get_y() == pos_y)
+            {
+                return iter;
+            }
+        }
+
+        return block_buffer.end();
+    }
+
+
+    void move_to_next_postion()
+    {
+        auto it = find_overlapped_iterator();
+
+        if(it != block_buffer.end()) //the next snake position has no overlapping with the block buffer
+        {
+            (*it)->set_dir((*(snake_list.begin()))->get_dir());
+            snake_list.push_front(*it);
+            block_buffer.erase(it);
+        }
+        else
+        {
+            auto snake_head = snake_list.begin();
+
+            auto it = snake_list.end();
+
+            std::advance(it, -1);
+
+            *(*it) = *(*snake_head);
+
+            if((*it)->get_dir() == MoveDirection::UP)
+            {
+                (*it)->move_up();
+            }
+
+            if((*it)->get_dir() == MoveDirection::DOWN)
+            {
+                (*it)->move_down();
+            }
+
+            if((*it)->get_dir() == MoveDirection::LEFT)
+            {
+                (*it)->move_left();
+            }
+
+            if((*it)->get_dir() == MoveDirection::RIGHT)
+            {
+                (*it)->move_right();
+            }
+
+            snake_list.push_front(*it);
+
+            snake_list.pop_back();
+
+            for(auto snake_ele : snake_list)
+            {
+                snake_ele->move(snake_ele->get_x(), snake_ele->get_y());
+                snake_ele->show();
+            }
+
         }
     }
 
