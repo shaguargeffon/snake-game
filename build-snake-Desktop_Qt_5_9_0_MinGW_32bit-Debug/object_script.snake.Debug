@@ -8,6 +8,5 @@ INPUT(
 ./debug\config.o
 ./debug\frame_builder.o
 ./debug\frame_layout.o
-./debug\snake_builder.o
 ./debug\moc_widget.o
 );

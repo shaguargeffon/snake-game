@@ -65,7 +65,8 @@ public:
 
         x+=(element_size_x)*(first_snake_x);
         y+=(element_size_y)*(first_snake_y);
-        Snake* p = new Snake(x, y);
+
+        std::shared_ptr<Snake> p(new Snake(x, y));
 
         snake_list.push_front(p);
 
@@ -231,7 +232,7 @@ private:
     unsigned int game_level;
     unsigned int timer_counter{0};
     unsigned int timer_recorder{0};
-    std::list<Snake*> snake_list;
+    std::list<std::shared_ptr<Snake>> snake_list;
 };
 
 
