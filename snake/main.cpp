@@ -4,9 +4,6 @@
 #include <QMouseEvent>
 #include <Qdebug>
 #include <iostream>
-#include "frame_builder.h"
-
-
 
 
 int main(int argc, char *argv[])
@@ -17,14 +14,8 @@ int main(int argc, char *argv[])
 
     game.resize(game_size_x, game_size_y);
 
-    FrameLayout frame_layout;
-    FrameBuilder f_builder(&frame_layout, game);
-
-    //SnakeBuilder s_builder;
-    //game.set_snake_builder(&s_builder);
-
-    game.initial_snake_to_game();
-
+    game.init_frame_to_game();
+    game.init_snake_to_game();
 
     game.show();
 

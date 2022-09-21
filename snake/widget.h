@@ -10,6 +10,8 @@
 #include "event_handler.h"
 #include <algorithm>
 #include <list>
+#include "frame.h"
+
 
 
 namespace Ui {
@@ -73,7 +75,72 @@ public:
     }
 
 
-    void initial_snake_to_game()
+    void init_frame_to_game()
+    {
+        unsigned int i{0};
+        unsigned int j{0};
+
+        //Generate above frame
+        for(i = 0; i<frame_amount_x; i++)
+        {
+            std::shared_ptr<Frame> p(new Frame(i, j));
+            frame_layout_buffer.push_back(p);
+        }
+
+        //Generate bottom frame
+        j = frame_amount_y - 1;
+        for(i = 0; i<frame_amount_x; i++)
+        {
+            std::shared_ptr<Frame> p(new Frame(i, j));
+            frame_layout_buffer.push_back(p);
+        }
+
+
+        //Generate left frame
+        i = 0;
+
+        for(j = 0; j<frame_amount_y-1; j++)
+        {
+            std::shared_ptr<Frame> p(new Frame(i, j));
+            frame_layout_buffer.push_back(p);
+        }
+
+
+        //Generate right frame
+        i = frame_amount_x - 1;
+
+        for(j = 0; j<frame_amount_y-1; j++)
+        {
+            std::shared_ptr<Frame> p(new Frame(i, j));
+            frame_layout_buffer.push_back(p);
+        }
+
+        // Assign frame to the game
+        for(auto it = frame_layout_buffer.begin(); it != frame_layout_buffer.end(); it++)
+        {
+            unsigned int x{start_point_coordinate_x};
+            unsigned int y{start_point_coordinate_y};
+
+            x+=(element_size_x)*((*it)->get_x());
+            y+=(element_size_y)*((*it)->get_y());
+
+            std::shared_ptr<Frame> frame_p(new Frame(x, y));
+
+            frame_p->setParent(this);
+
+            frame_p->move(x, y);
+
+            frame_p->resize(element_size_x, element_size_y);
+
+            frame_p->setStyleSheet("background-color: black");
+
+            frame_buffer.push_back(frame_p);
+
+            frame_p->show();
+        }
+    }
+
+    void init_snake_to_game()
     {
 
         for(auto it=snake_list.begin(); it!=snake_list.end(); it++)
@@ -233,6 +300,8 @@ private:
     unsigned int timer_counter{0};
     unsigned int timer_recorder{0};
     std::list<std::shared_ptr<Snake>> snake_list;
+    std::vector<std::shared_ptr<Frame>> frame_layout_buffer;
+    std::vector<std::shared_ptr<Frame>> frame_buffer;
 };
 
 

@@ -30,9 +30,7 @@ SOURCES += \
     event_handler/event_handler.cpp \
     snake/snake.cpp \
     frame/frame.cpp \
-    config/config.cpp \
-    frame/frame_builder.cpp \
-    frame/frame_layout.cpp
+    config/config.cpp
 
 
 
@@ -42,9 +40,7 @@ HEADERS += \
     event_handler/event_handler.h \
     snake/snake.h \
     frame/frame.h \
-    config/config.h \
-    frame/frame_builder.h \
-    frame/frame_layout.h
+    config/config.h
 
 
 
