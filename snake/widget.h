@@ -1,17 +1,16 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-
+#include <iostream>
+#include <list>
+#include <algorithm>
 #include <QWidget>
 #include <QtGui>
-#include <iostream>
 #include <QTimerEvent>
 #include "config.h"
 #include "event_handler.h"
-#include <algorithm>
-#include <list>
 #include "frame.h"
-
+#include <time.h>
 
 
 namespace Ui {
@@ -43,24 +42,23 @@ public:
         switch(game_level)
         {
             case 1:
-                timer_counter = timer_multiplier_hard;
+                timer_counter_movement = timer_multiplier_hard;
                 break;
 
             case 2:
-                timer_counter = timer_multiplier_normal;
+                timer_counter_movement = timer_multiplier_normal;
                 break;
 
             case 3:
-                timer_counter = timer_multiplier_easy;
+                timer_counter_movement = timer_multiplier_easy;
                 break;
 
             default:
-                timer_counter = timer_multiplier_easy;
+                timer_counter_movement = timer_multiplier_easy;
                 break;
         }
 
-        timer_recorder = timer_counter;
-
+        timer_recorder_movement = timer_counter_movement;
 
         unsigned int x{start_point_coordinate_x};
         unsigned int y{start_point_coordinate_y};
@@ -71,7 +69,6 @@ public:
         std::shared_ptr<Snake> p(new Snake(x, y));
 
         snake_list.push_front(p);
-
     }
 
 
@@ -80,14 +77,14 @@ public:
         unsigned int i{0};
         unsigned int j{0};
 
-        //Generate above frame
+        //Save index of above frame
         for(i = 0; i<frame_amount_x; i++)
         {
             std::shared_ptr<Frame> p(new Frame(i, j));
             frame_layout_buffer.push_back(p);
         }
 
-        //Generate bottom frame
+        //Save index of bottom frame
         j = frame_amount_y - 1;
         for(i = 0; i<frame_amount_x; i++)
         {
@@ -95,8 +92,7 @@ public:
             frame_layout_buffer.push_back(p);
         }
 
-
-        //Generate left frame
+        //Save index of left frame
         i = 0;
 
         for(j = 0; j<frame_amount_y-1; j++)
@@ -105,8 +101,7 @@ public:
             frame_layout_buffer.push_back(p);
         }
 
-
-        //Generate right frame
+        //Save index of right frame
         i = frame_amount_x - 1;
 
         for(j = 0; j<frame_amount_y-1; j++)
@@ -142,7 +137,6 @@ public:
 
     void init_snake_to_game()
     {
-
         for(auto it=snake_list.begin(); it!=snake_list.end(); it++)
         {
             unsigned int x{start_point_coordinate_x};
@@ -181,13 +175,11 @@ public:
     void move_right_callback()
     {
        (*(snake_list.begin()))->set_dir(MoveDirection::RIGHT);
-
     }
 
 
     void move_to_next_postion()
     {
-
         auto snake_head = snake_list.begin();
 
         auto it = snake_list.end();
@@ -226,6 +218,63 @@ public:
             snake_ele->show();
         }
     }
+
+
+    void generate_new_block()
+    {
+        srand((unsigned)time(NULL));
+
+        if(snake_list.size() <= game_snake_max_length)
+        {
+            unsigned int x{start_point_coordinate_x};
+            unsigned int y{start_point_coordinate_y};
+            //std::shared_ptr<Snake> p(new Snake(x, y));
+            unsigned int index_x = rand()%(frame_amount_x-2) + 1;
+            unsigned int index_y = rand()%(frame_amount_y-2) + 1;
+
+            x+=(element_size_x)*(index_x);
+            y+=(element_size_y)*(index_y);
+
+            bool is_block_overlapped_with_snake = false;
+            for(auto snake : snake_list)
+            {
+                if ((snake->get_x() == x) && (snake->get_y() == y))
+                {
+                    is_block_overlapped_with_snake = true;
+                    break;
+                }
+            }
+
+            bool is_block_overlapped_with_block_buffer = false;
+            for(auto snake : block_buffer)
+            {
+                if ((snake->get_x() == x) && (snake->get_y() == y))
+                {
+                    is_block_overlapped_with_block_buffer = true;
+                    break;
+                }
+            }
+
+
+            if(!is_block_overlapped_with_block_buffer && !is_block_overlapped_with_snake) // the block not found, so can be created
+            {
+                std::shared_ptr<Snake> p(new Snake(x, y));
+                p->setParent(this);
+                p->move(x, y);
+                p->resize(element_size_x, element_size_y);
+                p->setStyleSheet("background-color: red");
+                block_buffer.push_back(p);
+                p->show();
+            }
+            else
+            {
+                //block overlapped with snake or already generated, then not generated.
+            }
+
+        }
+
+    }
+
 
 
     ~Game()
@@ -281,15 +330,25 @@ protected:
             std::cout<<"Event is null."<<std::endl;
         }
 
-        if(timer_counter>0)
+        if(timer_counter_movement>0)
         {
-            timer_counter--;
+            timer_counter_movement--;
         }
         else
         {
             move_to_next_postion();
-            //std::cout<<"Update"<<std::endl;
-            timer_counter = timer_recorder;
+            timer_counter_movement = timer_recorder_movement;
+        }
+
+
+        if(timer_counter_create_new_block >0)
+        {
+            timer_counter_create_new_block--;
+        }
+        else
+        {
+            generate_new_block();
+            timer_counter_create_new_block = timer_creation_new_block;
         }
     }
 
@@ -297,9 +356,11 @@ protected:
 private:
     int timerId;
     unsigned int game_level;
-    unsigned int timer_counter{0};
-    unsigned int timer_recorder{0};
+    unsigned int timer_counter_movement;
+    unsigned int timer_recorder_movement;
+    unsigned int timer_counter_create_new_block{timer_creation_new_block};
     std::list<std::shared_ptr<Snake>> snake_list;
+    std::vector<std::shared_ptr<Snake>> block_buffer;
     std::vector<std::shared_ptr<Frame>> frame_layout_buffer;
     std::vector<std::shared_ptr<Frame>> frame_buffer;
 };
