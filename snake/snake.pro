@@ -32,8 +32,7 @@ SOURCES += \
     frame/frame.cpp \
     config/config.cpp \
     frame/frame_builder.cpp \
-    frame/frame_layout.cpp \
-    snake/snake_builder.cpp
+    frame/frame_layout.cpp
 
 
 
@@ -45,8 +44,7 @@ HEADERS += \
     frame/frame.h \
     config/config.h \
     frame/frame_builder.h \
-    frame/frame_layout.h \
-    snake/snake_builder.h
+    frame/frame_layout.h
 
 
 

@@ -20,8 +20,9 @@ int main(int argc, char *argv[])
     FrameLayout frame_layout;
     FrameBuilder f_builder(&frame_layout, game);
 
-    SnakeBuilder s_builder;
-    game.set_snake_builder(&s_builder);
+    //SnakeBuilder s_builder;
+    //game.set_snake_builder(&s_builder);
+
     game.initial_snake_to_game();
 
 

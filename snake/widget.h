@@ -8,7 +8,6 @@
 #include <QTimerEvent>
 #include "config.h"
 #include "event_handler.h"
-#include "snake_builder.h"
 #include <algorithm>
 #include <list>
 
@@ -59,22 +58,24 @@ public:
         }
 
         timer_recorder = timer_counter;
-    }
 
 
-    void set_snake_builder(SnakeBuilder* s)
-    {
-        snake_builder_p = s;
+        unsigned int x{start_point_coordinate_x};
+        unsigned int y{start_point_coordinate_y};
+
+        x+=(element_size_x)*(first_snake_x);
+        y+=(element_size_y)*(first_snake_y);
+        Snake* p = new Snake(x, y);
+
+        snake_list.push_front(p);
+
     }
 
 
     void initial_snake_to_game()
     {
-        auto s = snake_builder_p->get_available_snake();
 
-        //s->build_layout();
-
-        for(auto it=s.begin(); it!=s.end(); it++)
+        for(auto it=snake_list.begin(); it!=snake_list.end(); it++)
         {
             unsigned int x{start_point_coordinate_x};
             unsigned int y{start_point_coordinate_y};
@@ -87,49 +88,45 @@ public:
             (*it)->resize(element_size_x, element_size_y);
             (*it)->setStyleSheet("background-color: red");
             (*it)->show();
-
         }
     }
 
 
     void move_up_callback()
     {
-       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
-       snake_p->set_dir(MoveDirection::UP);
+       (*(snake_list.begin()))->set_dir(MoveDirection::UP);
     }
 
 
     void move_down_callback()
     {
-       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
-       snake_p->set_dir(MoveDirection::DOWN);
+       (*(snake_list.begin()))->set_dir(MoveDirection::DOWN);
     }
 
 
     void move_left_callback()
     {
-       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
-       snake_p->set_dir(MoveDirection::LEFT);
+       (*(snake_list.begin()))->set_dir(MoveDirection::LEFT);
     }
 
 
     void move_right_callback()
     {
-       Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
-       snake_p->set_dir(MoveDirection::RIGHT);
+       (*(snake_list.begin()))->set_dir(MoveDirection::RIGHT);
 
     }
 
 
     void move_to_next_postion()
     {
-        Snake* snake_p = *((snake_builder_p->get_available_snake()).begin());
 
-        auto it = snake_builder_p->get_available_snake().end();
+        auto snake_head = snake_list.begin();
+
+        auto it = snake_list.end();
 
         std::advance(it, -1);
 
-        *(*it) = *snake_p;
+        *(*it) = *(*snake_head);
 
         if((*it)->get_dir() == MoveDirection::UP)
         {
@@ -151,16 +148,15 @@ public:
             (*it)->move_right();
         }
 
-        snake_builder_p->get_available_snake().push_front(*it);
+        snake_list.push_front(*it);
 
-        snake_builder_p->get_available_snake().pop_back();
+        snake_list.pop_back();
 
-        for(auto snake : snake_builder_p->get_available_snake())
+        for(auto snake_ele : snake_list)
         {
-            snake->move(snake->get_x(), snake->get_y());
-            snake->show();
+            snake_ele->move(snake_ele->get_x(), snake_ele->get_y());
+            snake_ele->show();
         }
-
     }
 
 
@@ -195,7 +191,6 @@ protected:
 
         if(event->key() == Qt::Key_P)
         {
-            //move_right_callback();
             std::cout<<"Stop game."<<std::endl;
         }
 
@@ -231,15 +226,12 @@ protected:
     }
 
 
-
-
-
 private:
     int timerId;
     unsigned int game_level;
     unsigned int timer_counter{0};
     unsigned int timer_recorder{0};
-    SnakeBuilder* snake_builder_p;
+    std::list<Snake*> snake_list;
 };
 
 
