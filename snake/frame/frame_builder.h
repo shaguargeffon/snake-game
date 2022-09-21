@@ -22,7 +22,7 @@ public:
             x+=(element_size_x)*((*it)->get_x());
             y+=(element_size_y)*((*it)->get_y());
 
-            Frame* frame_p = new Frame(x, y);
+            std::shared_ptr<Frame> frame_p(new Frame(x, y));
 
             frame_p->setParent(&w);
 
@@ -41,13 +41,9 @@ public:
 
 
 private:
-    std::vector<Frame*> frame_layout;
+    std::vector<std::shared_ptr<Frame>> frame_layout;
 
 };
-
-
-
-
 
 
 #endif // FRAME_BUILDER_H

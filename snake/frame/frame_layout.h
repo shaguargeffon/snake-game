@@ -3,7 +3,7 @@
 
 #include "frame.h"
 #include <vector>
-
+#include <memory>
 
 class FrameLayout
 {
@@ -18,8 +18,7 @@ public:
         //Generate above frame
         for(i = 0; i<frame_amount_x; i++)
         {
-            //std::shared_ptr<Layout> p(new Layout(i, j));
-            Frame *p = new Frame(i, j);
+            std::shared_ptr<Frame> p(new Frame(i, j));
             frame_layout.push_back(p);
         }
 
@@ -27,8 +26,7 @@ public:
         j = frame_amount_y - 1;
         for(i = 0; i<frame_amount_x; i++)
         {
-            //std::shared_ptr<Layout> p(new Layout(i, j));
-            Frame *p = new Frame(i, j);
+            std::shared_ptr<Frame> p(new Frame(i, j));
             frame_layout.push_back(p);
         }
 
@@ -38,8 +36,7 @@ public:
 
         for(j = 0; j<frame_amount_y-1; j++)
         {
-            //std::shared_ptr<Layout> p(new Layout(i, j));
-            Frame *p = new Frame(i, j);
+            std::shared_ptr<Frame> p(new Frame(i, j));
             frame_layout.push_back(p);
         }
 
@@ -49,16 +46,14 @@ public:
 
         for(j = 0; j<frame_amount_y-1; j++)
         {
-            //std::shared_ptr<Layout> p(new Layout(i, j));
-            Frame *p = new Frame(i, j);
+            std::shared_ptr<Frame> p(new Frame(i, j));
             frame_layout.push_back(p);
         }
-
 
     }
 
 
-    std::vector<Frame*>& get_layout()
+    std::vector<std::shared_ptr<Frame>>& get_layout()
     {
         return frame_layout;
     }
@@ -66,7 +61,7 @@ public:
     ~FrameLayout() = default;
 
 private:
-    std::vector<Frame*> frame_layout;
+    std::vector<std::shared_ptr<Frame>> frame_layout;
 };
 
 
