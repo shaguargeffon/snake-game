@@ -26,8 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     widget.cpp \
-    snake/snake.cpp \
-    frame/frame.cpp \
     config/config.cpp
 
 

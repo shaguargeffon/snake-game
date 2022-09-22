@@ -3,25 +3,28 @@
 #include <QPushButton>
 #include "config.h"
 
-
+template <typename T>
 class Frame: public QPushButton
 {
 public:
-    Frame(unsigned int pos_x, unsigned int pos_y);
+    Frame(T pos_x, T pos_y): x(pos_x), y(pos_y)
+    {
 
-    unsigned int get_x()
+    }
+
+    T get_x()
     {
         return x;
     }
 
-    unsigned int get_y()
+    T get_y()
     {
         return y;
     }
 
 
 private:
-    unsigned int x;
-    unsigned int y;
+    T x;
+    T y;
 };
 

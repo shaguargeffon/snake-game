@@ -14,29 +14,31 @@ enum class MoveDirection
 };
 
 
-
+template <typename T>
 class Snake: public QPushButton
 {
 public:
-    Snake(unsigned int pos_x, unsigned int pos_y);
+    Snake(T pos_x, T pos_y): x(pos_x), y(pos_y)
+    {
+    }
 
-    unsigned int get_x()
+    T get_x()
     {
         return x;
     }
 
-    void set_x(unsigned int pos_x)
+    void set_x(T pos_x)
     {
         x = pos_x;
     }
 
 
-    unsigned int get_y()
+    T get_y()
     {
         return y;
     }
 
-    void set_y(unsigned int pos_y)
+    void set_y(T pos_y)
     {
         y = pos_y;
     }
@@ -91,8 +93,8 @@ public:
 
 
 private:
-    unsigned int x;
-    unsigned int y;
+    T x;
+    T y;
     MoveDirection dir{MoveDirection::NONE};
 };
 
