@@ -1,5 +1,4 @@
-#ifndef SNAKE_H
-#define SNAKE_H
+#pragma once
 
 
 #include <QPushButton>
@@ -97,6 +96,3 @@ private:
     MoveDirection dir{MoveDirection::NONE};
 };
 
-
-
-#endif // SNAKE_H

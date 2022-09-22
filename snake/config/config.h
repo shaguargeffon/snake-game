@@ -1,6 +1,4 @@
-#ifndef CONFIG_H
-#define CONFIG_H
-
+#pragma once
 
 extern const unsigned int timer_scale;
 
@@ -28,8 +26,5 @@ extern const unsigned int start_point_coordinate_y;
 extern const unsigned int first_snake_x;
 extern const unsigned int first_snake_y;
 
-
 extern const unsigned int game_snake_max_length;
 
-
-#endif //CONFIG_H

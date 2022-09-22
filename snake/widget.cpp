@@ -4,6 +4,9 @@
 #include <iostream>
 #include <QTimer>
 
+
+//QApplication* application = nullptr;
+
 void update()
 {
     std::cout<<"Update"<<std::endl;
@@ -28,5 +31,10 @@ Widget::~Widget()
     delete ui;
 }
 
+QApplication* application = nullptr;
 
+void get_app_pointer(QApplication* app)
+{
+    application = app;
+}
 

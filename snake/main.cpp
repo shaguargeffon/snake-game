@@ -1,14 +1,11 @@
 #include "widget.h"
 #include <QApplication>
-#include <QKeyEvent>
-#include <QMouseEvent>
-#include <Qdebug>
-#include <iostream>
 
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    get_app_pointer(&app);
 
     Game game;
 
@@ -19,5 +16,5 @@ int main(int argc, char *argv[])
 
     game.show();
 
-    return a.exec();
+    return app.exec();
 }

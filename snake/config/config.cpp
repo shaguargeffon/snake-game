@@ -9,7 +9,6 @@ const unsigned int timer_multiplier_easy{20};
 
 const unsigned int timer_creation_new_block{timer_multiplier_easy * 10};
 
-
 const unsigned int game_size_x{2000};
 const unsigned int game_size_y{1500};
 

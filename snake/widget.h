@@ -1,16 +1,23 @@
-#ifndef WIDGET_H
-#define WIDGET_H
+#pragma once
 
 #include <iostream>
 #include <list>
 #include <algorithm>
+#include <memory>
+#include <time.h>
 #include <QWidget>
 #include <QtGui>
 #include <QTimerEvent>
+#include <QApplication>
 #include "config.h"
-#include "event_handler.h"
 #include "frame.h"
-#include <time.h>
+#include "snake.h"
+
+
+
+extern QApplication* application;
+
+void get_app_pointer(QApplication* app);
 
 
 namespace Ui {
@@ -178,9 +185,11 @@ public:
     }
 
 
-    bool is_snake_head_overlapped_with_block()
+
+    bool check_game_over()
     {
         auto it = snake_list.begin();
+
         unsigned int pos_x = (*it)->get_x();
         unsigned int pos_y = (*it)->get_y();
 
@@ -188,39 +197,48 @@ public:
         {
              pos_y -= element_size_y;
         }
-
-        if((*it)->get_dir() == MoveDirection::DOWN)
+        else if((*it)->get_dir() == MoveDirection::DOWN)
         {
             pos_y += element_size_y;
         }
 
-        if((*it)->get_dir() == MoveDirection::LEFT)
+        else if((*it)->get_dir() == MoveDirection::LEFT)
         {
             pos_x -= element_size_x;
         }
-
-        if((*it)->get_dir() == MoveDirection::RIGHT)
+        else if((*it)->get_dir() == MoveDirection::RIGHT)
         {
             pos_x += element_size_x;
         }
-
-        bool is_next_snake_position_overlapped_with_block = false;
-        for(auto snake : block_buffer)
+        else
         {
-            if ((snake->get_x() == pos_x) && (snake->get_y() == pos_y))
+            return false;
+        }
+
+        for(auto iter=frame_buffer.begin(); iter!=frame_buffer.end(); iter++)
+        {
+            if ((*iter)->get_x() == pos_x && (*iter)->get_y() == pos_y)
             {
-                is_next_snake_position_overlapped_with_block = true;
-                break;
+                return true;
             }
         }
 
-        return is_next_snake_position_overlapped_with_block;
+        for(auto iter=snake_list.begin(); iter!=snake_list.end(); iter++)
+        {
+            if ((*iter)->get_x() == pos_x && (*iter)->get_y() == pos_y)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
     std::vector<std::shared_ptr<Snake>>::iterator find_overlapped_iterator()
     {
         auto it = snake_list.begin();
+
         unsigned int pos_x = (*it)->get_x();
         unsigned int pos_y = (*it)->get_y();
 
@@ -257,8 +275,20 @@ public:
     }
 
 
-    void move_to_next_postion()
+    bool move_to_next_postion()
     {
+        bool is_game_over = check_game_over();
+
+        if(is_game_over)
+        {
+            application->exit(0);
+        }
+
+        if(stop_control)
+        {
+            return false;
+        }
+
         auto it = find_overlapped_iterator();
 
         if(it != block_buffer.end()) //the next snake position has no overlapping with the block buffer
@@ -308,18 +338,25 @@ public:
             }
 
         }
+
+        return true;
     }
 
 
-    void generate_new_block()
+    bool generate_new_block()
     {
+        if(stop_control)    //quick fail
+        {
+            return false;
+        }
+
         srand((unsigned)time(NULL));
 
         if(snake_list.size() <= game_snake_max_length)
         {
             unsigned int x{start_point_coordinate_x};
             unsigned int y{start_point_coordinate_y};
-            //std::shared_ptr<Snake> p(new Snake(x, y));
+
             unsigned int index_x = rand()%(frame_amount_x-2) + 1;
             unsigned int index_y = rand()%(frame_amount_y-2) + 1;
 
@@ -356,14 +393,18 @@ public:
                 p->setStyleSheet("background-color: red");
                 block_buffer.push_back(p);
                 p->show();
+
             }
             else
             {
                 //block overlapped with snake or already generated, then not generated.
+                return false;
             }
 
+            return true;
         }
 
+        return false;
     }
 
 
@@ -377,39 +418,39 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *event)
     {
-        if(event->key() == Qt::Key_W)
+        if(!stop_control)
         {
-            move_up_callback();
-        }
+            if(event->key() == Qt::Key_W)
+            {
+                move_up_callback();
+            }
 
-        if(event->key() == Qt::Key_S)
-        {
-            move_down_callback();
-        }
+            if(event->key() == Qt::Key_S)
+            {
+                move_down_callback();
+            }
 
-        if(event->key() == Qt::Key_A)
-        {
-            move_left_callback();
-        }
+            if(event->key() == Qt::Key_A)
+            {
+                move_left_callback();
+            }
 
-        if(event->key() == Qt::Key_D)
-        {
-            move_right_callback();
+            if(event->key() == Qt::Key_D)
+            {
+                move_right_callback();
+            }
         }
 
         if(event->key() == Qt::Key_P)
         {
-            std::cout<<"Stop game."<<std::endl;
-        }
-
-    }
-
-
-    void keyReleaseEvent(QKeyEvent *event)
-    {
-        if(event->key() == Qt::Key_Escape)
-        {
-            std::cout<<"release ESC key."<<std::endl;
+            if(stop_control)
+            {
+                stop_control = false;
+            }
+            else
+            {
+                stop_control = true;
+            }
         }
     }
 
@@ -421,25 +462,28 @@ protected:
             std::cout<<"Event is null."<<std::endl;
         }
 
-        if(timer_counter_movement>0)
+        if(!stop_control)
         {
-            timer_counter_movement--;
-        }
-        else
-        {
-            move_to_next_postion();
-            timer_counter_movement = timer_recorder_movement;
-        }
+            if(timer_counter_movement>0)
+            {
+                timer_counter_movement--;
+            }
+            else
+            {
+                move_to_next_postion();
+                timer_counter_movement = timer_recorder_movement;
+            }
 
 
-        if(timer_counter_create_new_block >0)
-        {
-            timer_counter_create_new_block--;
-        }
-        else
-        {
-            generate_new_block();
-            timer_counter_create_new_block = timer_creation_new_block;
+            if(timer_counter_create_new_block >0)
+            {
+                timer_counter_create_new_block--;
+            }
+            else
+            {
+                generate_new_block();
+                timer_counter_create_new_block = timer_creation_new_block;
+            }
         }
     }
 
@@ -454,10 +498,6 @@ private:
     std::vector<std::shared_ptr<Snake>> block_buffer;
     std::vector<std::shared_ptr<Frame>> frame_layout_buffer;
     std::vector<std::shared_ptr<Frame>> frame_buffer;
+    bool stop_control{false};
 };
 
-
-
-
-
-#endif // WIDGET_H

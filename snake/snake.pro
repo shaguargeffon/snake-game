@@ -26,8 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     widget.cpp \
-    application/application.cpp \
-    event_handler/event_handler.cpp \
     snake/snake.cpp \
     frame/frame.cpp \
     config/config.cpp
@@ -36,8 +34,6 @@ SOURCES += \
 
 HEADERS += \
     widget.h \
-    application/application.h \
-    event_handler/event_handler.h \
     snake/snake.h \
     frame/frame.h \
     config/config.h
@@ -45,8 +41,6 @@ HEADERS += \
 
 
 INCLUDEPATH += \
-    application \
-    event_handler \
     frame \
     snake \
     config

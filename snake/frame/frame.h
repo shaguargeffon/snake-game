@@ -1,10 +1,7 @@
-#ifndef FRAME_H
-#define FRAME_H
+#pragma once
 
 #include <QPushButton>
 #include "config.h"
-
-
 
 
 class Frame: public QPushButton
@@ -28,10 +25,3 @@ private:
     unsigned int y;
 };
 
-
-
-
-
-
-
-#endif // FRAME_H
