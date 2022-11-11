@@ -57,7 +57,7 @@ Game::Game(QWidget *parent, GAME_LEVEL_TYPE lvl) : QWidget(parent), game_level(l
     x+= element_size_x * first_snake_x;
     y+= element_size_y * first_snake_y;
 
-    std::shared_ptr<Snake<SNAKE_TYPE>> p(new Snake<SNAKE_TYPE>(x, y));
+    auto p = std::make_shared<Snake<SNAKE_TYPE>>(x, y);
 
     snake_list.push_front(p);
 }
@@ -71,7 +71,7 @@ void Game::init_frame_to_game()
     //Save index of above frame
     for(i = 0; i<frame_amount_x; i++)
     {
-        std::shared_ptr<Frame<FRAME_TYPE>> p(new Frame<FRAME_TYPE>(i, j));
+        auto p = std::make_shared<Frame<FRAME_TYPE>>(i, j);
         frame_layout_buffer.push_back(p);
     }
 
@@ -79,7 +79,7 @@ void Game::init_frame_to_game()
     j = frame_amount_y - 1;
     for(i = 0; i<frame_amount_x; i++)
     {
-        std::shared_ptr<Frame<FRAME_TYPE>> p(new Frame<FRAME_TYPE>(i, j));
+        auto p = std::make_shared<Frame<FRAME_TYPE>>(i, j);
         frame_layout_buffer.push_back(p);
     }
 
@@ -88,7 +88,7 @@ void Game::init_frame_to_game()
 
     for(j = 0; j<frame_amount_y-1; j++)
     {
-        std::shared_ptr<Frame<FRAME_TYPE>> p(new Frame<FRAME_TYPE>(i, j));
+        auto p = std::make_shared<Frame<FRAME_TYPE>>(i, j);
         frame_layout_buffer.push_back(p);
     }
 
@@ -97,7 +97,7 @@ void Game::init_frame_to_game()
 
     for(j = 0; j<frame_amount_y-1; j++)
     {
-        std::shared_ptr<Frame<FRAME_TYPE>> p(new Frame<FRAME_TYPE>(i, j));
+        auto p = std::make_shared<Frame<FRAME_TYPE>>(i, j);
         frame_layout_buffer.push_back(p);
     }
 
@@ -110,7 +110,7 @@ void Game::init_frame_to_game()
         x+= element_size_x * ((*it)->get_x());
         y+= element_size_y * ((*it)->get_y());
 
-        std::shared_ptr<Frame<FRAME_TYPE>> frame_p(new Frame<FRAME_TYPE>(x, y));
+        auto frame_p = std::make_shared<Frame<FRAME_TYPE>>(x, y);
 
         frame_p->setParent(this);
 
@@ -376,7 +376,7 @@ bool Game::generate_new_block()
 
         if(!is_block_overlapped_with_block_buffer && !is_block_overlapped_with_snake) // the block not found, so can be created
         {
-            std::shared_ptr<Snake<SNAKE_TYPE>> p(new Snake<SNAKE_TYPE>(x, y));
+            auto p = std::make_shared<Snake<SNAKE_TYPE>>(x, y);
 
             p->setParent(this);
 
